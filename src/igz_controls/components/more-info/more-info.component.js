@@ -18,7 +18,7 @@
             controller: IgzMoreInfoController
         });
 
-    function IgzMoreInfoController($document, $element, $timeout, lodash) {
+    function IgzMoreInfoController($compile, $document, $element, $sce, $scope, $timeout, lodash) {
         var ctrl = this;
 
         ctrl.iconTypes = {
@@ -54,6 +54,11 @@
             // Defaults trigger method to 'mouseenter'. Available 2 modes: `mouseenter` (hover) and `click`.
             if (ctrl.trigger !== 'click') {
                 ctrl.trigger = 'mouseenter';
+            }
+
+            if (ctrl.isHtmlEnabled) {
+                var compiled = $compile('<p>' + ctrl.description + '</p>')($scope);
+                ctrl.compileDescription = $sce.trustAsHtml(compiled[0].innerHTML);
             }
         }
 

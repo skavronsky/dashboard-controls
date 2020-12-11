@@ -104,7 +104,8 @@
          * @param {string} state - absolute state name or relative state path
          */
         function onSelectRow(event, state) {
-            if (lodash.isNil(event.target.closest('.igz-action-item'))) {
+            if (lodash.isNil(event.target.closest('.igz-action-item')) &&
+                lodash.isNil(event.target.closest('.actions-more-info'))) {
                 if (!angular.isString(state)) {
                     state = 'app.project.function.edit.code';
                 }
